@@ -29,5 +29,5 @@ for trade_date in zip(trade_cal, trade_cal_is_open):
         f.write('\n')
         f.write(log_str)
     with open("data/daily/daily_{}.json".format(trade_date[0]), "w", encoding="utf-8") as f:
-        f.write(json.dumps(data.to_dict(), ensure_ascii=False, indent=4))
+        f.write(json.dumps(data.to_dict(), ensure_ascii=False, indent=4).replace('NaN', 'null'))
     i += 1
