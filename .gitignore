@@ -6,3 +6,4 @@ data/moneyflow
 daily_log.txt
 daily_basic_log.txt
 *.zip
+*.txt

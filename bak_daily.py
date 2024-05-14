@@ -17,16 +17,16 @@ trade_cal = [i for i in trade_cal_data.get('cal_date').values()][::-1][i:]
 trade_cal_is_open = [i for i in trade_cal_data.get('is_open').values()][::-1][i:]
 
 for trade_date in zip(trade_cal, trade_cal_is_open):
-    if trade_date[1] == 0 or os.path.exists(r"C:\Users\wp\Desktop\gp\data\moneyflow\moneyflow_{}.json".format(trade_date[0])) \
-            or int(trade_date[0]) < 20100000 or int(trade_date[0]) > 20240514:
+    if trade_date[1] == 0 or os.path.exists(r"C:\Users\wp\Desktop\gp\data\bak_daily\bak_daily_{}.json".format(trade_date[0])) \
+            or int(trade_date[0]) < 20170500 or int(trade_date[0]) > 20240514:
         i += 1
         continue
-    data: DataFrame = pro.moneyflow(trade_date=trade_date[0])
+    data: DataFrame = pro.bak_daily(trade_date=trade_date[0])
     log_str = "[{}/{}] date:{} data.shape:{}".format(i, len(trade_cal), trade_date[0], str(data.shape))
     print(log_str)
-    with open("moneyflow_log.txt", "a", encoding="utf-8") as f:
+    with open("bak_daily_log.txt", "a", encoding="utf-8") as f:
         f.write('\n')
         f.write(log_str)
-    with open(r"C:\Users\wp\Desktop\gp\data\moneyflow\moneyflow_{}.json".format(trade_date[0]), "w", encoding="utf-8") as f:
+    with open(r"C:\Users\wp\Desktop\gp\data\bak_daily\bak_daily_{}.json".format(trade_date[0]), "w", encoding="utf-8") as f:
         f.write(json.dumps(data.to_dict(), ensure_ascii=False, indent=4).replace('NaN', 'null'))
     i += 1
